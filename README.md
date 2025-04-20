@@ -1,12 +1,46 @@
-# React + Vite
+# ☕ Cafeteria App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o projeto **frontend** de um site para uma **cafeteria**, desenvolvido com **React.js**. 
+O sistema permite que usuários se cadastrem, façam login, visualizem produtos e, se forem responsáveis pelo gerenciamento, possam **criar, editar e deletar produtos** no sistema.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades
 
-## Expanding the ESLint configuration
+- ✅ Página de apresentação com os produtos disponíveis
+- ✅ Cadastro de novos usuários
+- ✅ Login de usuários cadastrados
+- ✅ Sistema de autenticação para proteger áreas restritas
+- ✅ CRUD completo de produtos:
+  - Criar novo produto
+  - Editar produto existente
+  - Excluir produto
+  - Listar todos os produtos cadastrados
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Tecnologias utilizadas
+
+- [React](https://reactjs.org/)
+- [React Router DOM]
+- [CSS puro](para estilização)
+- [Vite](build rápido)
+- [Axios](para requisições à API)
+
+
+Como rodar o projeto
+
+Clone o repositório:
+
+git clone https://github.com/seu-usuario/cafeteria-frontend.git
+
+Instale as dependências:
+
+npm install
+Rode o projeto localmente:
+
+
+npm run dev
+Acesse no navegador:
+
+
+http://localhost:5173
