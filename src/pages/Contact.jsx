@@ -11,7 +11,7 @@ export default function Contact() {
 
       <p className="text-center text-lg font-semibold mb-6">
         Entre em contato:{" "}
-        <a href="tel:+5573988756818" className="text-amber-100 hover:underline">
+        <a href="tel:(73)988756818" className="text-amber-100 hover:underline">
           (73) 98875-6818
         </a>
       </p>
