@@ -2,10 +2,10 @@ import react, { useState } from "react";
 
 export default function Form({ onSubmit }) {
   const [product, setProduct] = useState({
-    name: "",
-    price: "",
-    description: "",
-    category: "",
+    nome: "",
+    preco: "",
+    descricao: "",
+    categoria: "",
   });
 
   const handleChange = (event) => {
@@ -16,8 +16,8 @@ export default function Form({ onSubmit }) {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     if (!product.nome || !product.preco || !product.categoria) {
       alert("Preencha todos os campos obrigatórios.");
@@ -37,6 +37,8 @@ export default function Form({ onSubmit }) {
       categoria: "",
     });
   };
+
+
   return (
     // integrar visibilidade apenas ao admin;
     //adicionar edit e delete
@@ -46,7 +48,7 @@ export default function Form({ onSubmit }) {
         Cadastr de Produtos
       </h2>
 
-      <label className="block mb-2">Nome *</label>
+      <label className="block mb-2">  Nome *</label>
       <input
         type="text"
         name="nome"
@@ -71,11 +73,11 @@ export default function Form({ onSubmit }) {
       <input
         type="text"
         name="description"
-        value={product.description}
+        value={product.descricao}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         step="0.01"
-        required
+        
       />
 
       <label className="block mb-2">Categoria *</label>
@@ -92,12 +94,14 @@ export default function Form({ onSubmit }) {
         <option value="sobremesas">Sobremesas</option>
       </select>
 
+    <div className="flex justify-center">
       <button
         type="submit"
-        className="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
+        className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600"
       >
         Cadastrar Produto
       </button>
+      </div>
     </form>
   );
 }
