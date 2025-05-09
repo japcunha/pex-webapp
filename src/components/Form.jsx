@@ -1,6 +1,6 @@
 import react, { useState } from "react";
 
-export default function Form({ onSubmit }) {
+export default function Form({ onSubmit, editProduct, onDelete}) {
   const [product, setProduct] = useState({
     nome: "",
     preco: "",
@@ -45,7 +45,7 @@ export default function Form({ onSubmit }) {
 
     <form onSubmit={handleSubmit}>
       <h2 className="text-2xl text-center font-bold mb-4">
-        Cadastr de Produtos
+        Cadastro de Produtos
       </h2>
 
       <label className="block mb-2">  Nome *</label>
@@ -72,7 +72,7 @@ export default function Form({ onSubmit }) {
       <label className="block mb-2">Descrição </label>
       <input
         type="text"
-        name="description"
+        name="descricao"
         value={product.descricao}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
