@@ -1,12 +1,25 @@
-import react, { useState } from "react";
+import react, { useState,useEffect } from "react";
 
-export default function Form({ onSubmit, editProduct, onDelete}) {
+export default function Form({ onSubmit, editProduct, onDelete }) {
   const [product, setProduct] = useState({
     nome: "",
     preco: "",
     descricao: "",
     categoria: "",
   });
+
+  useEffect(() => {
+    if (editProduct) {
+      setProduct(editProduct);
+    } else {
+      setProduct({
+        nome: "",
+        preco: "",
+        descricao: "",
+        categoria: "",
+      });
+    }
+  }, [editProduct]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,17 +51,16 @@ export default function Form({ onSubmit, editProduct, onDelete}) {
     });
   };
 
-
   return (
     // integrar visibilidade apenas ao admin;
     //adicionar edit e delete
 
     <form onSubmit={handleSubmit}>
       <h2 className="text-2xl text-center font-bold mb-4">
-        Cadastro de Produtos
+        {editProduct ? "editar produto" : "Cadastro de Produtos"}
       </h2>
 
-      <label className="block mb-2">  Nome *</label>
+      <label className="block mb-2"> Nome *</label>
       <input
         type="text"
         name="nome"
@@ -77,7 +89,6 @@ export default function Form({ onSubmit, editProduct, onDelete}) {
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         step="0.01"
-        
       />
 
       <label className="block mb-2">Categoria *</label>
@@ -94,13 +105,22 @@ export default function Form({ onSubmit, editProduct, onDelete}) {
         <option value="sobremesas">Sobremesas</option>
       </select>
 
-    <div className="flex justify-center">
-      <button
-        type="submit"
-        className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600"
-      >
-        Cadastrar Produto
-      </button>
+      <div className="flex justify-center gap-5">
+        <button
+          type="submit"
+          className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600"
+        >
+          {editProduct ? "Salvar Alterações" : "Cadastrar Produto"}
+        </button>
+        {editProduct && (
+          <button
+            type="button"
+            onClick={() => onDelete(editProduct.id)}
+            className="bg-red-500 text-white mt-10  px-4 py-2 rounded hover:bg-red-600"
+          >
+            Excluir Produto
+          </button>
+        )}
       </div>
     </form>
   );

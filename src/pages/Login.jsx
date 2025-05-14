@@ -1,21 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({onLoginSuccess}) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-
   const [Cadastro, setCadastro] = useState(false);
   const [jaCadastrado, setJaCadastrado] = useState({
     email: "joane@admin.com",
     senha: "123456",
   });
 
+  const navigate = useNavigate();
+
   //evitar recarregamento da pagina
+  
   const handleLogin = (e) => {
     e.preventDefault();
 
     if (email === jaCadastrado.email && senha === jaCadastrado.senha) {
       alert("login realizado com sucesso!");
+      onLoginSuccess(email);
+      navigate("/menu");
     } else {
       alert("email ou senha incorretos!");
     }
@@ -63,13 +68,16 @@ export default function Login() {
         >{Cadastro ? "Cadastrrar" : "Entrar"}
           
         </button>
-        
           <button type="button"  onClick={() => setCadastro(!Cadastro)}
             className="w-full text-sm text-blue-500 ">
               {Cadastro ? "ja tem uma conta? fazer login" : "criar nova conta"}
-          </button>
+          </button> 
+          
 
       </form>
+
+    
+
     </div>
   );
 }

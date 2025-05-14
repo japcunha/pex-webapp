@@ -1,26 +1,24 @@
-// src/services/fakeApi.js
-export async function getProducts() {
-  return Promise.resolve([
-    {
-      id: 1,
-      name: "Café Expresso",
-      price: 6.0,
-      description: "Café curto e encorpado.",
-      categoria: "Bebida",
-    },
-    {
-      id: 2,
-      name: "Coxinha",
-      price: 10.0,
-      description: "Frango desfiado e massa empanada",
-      categoria: "Salgado",
-    },
-    {
-      id: 3,
-      name: "Brigadeiro",
-      price: 3.5,
-      description: "feito com cacau 50% chocolate",
-      categoria: "Sobremesa",
-    },
-  ]);
-}
+import axios from 'axios';
+
+
+const API_URL = 'http://localhost:3001/produtos';
+
+export const getProduct = async () => {
+  const response = await axios.get(API_URL);
+  return response.data;
+};
+
+export const createProduct = async (product) => {
+  const response = await axios.post(API_URL, product);
+  return response.data;
+};
+
+export const updateProduct = async (id, product) => {
+  const response = await axios.put(`${API_URL}/${id}`, product);
+  return response.data;
+};
+
+export const deleteProduct = async (id) => {
+  const response = await axios.delete(`${API_URL}/${id}`);
+  return response.data;
+};
