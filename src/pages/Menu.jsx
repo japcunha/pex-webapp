@@ -1,8 +1,10 @@
 import MenuSection from "../components/MenuSection.jsx";
 import Form from "../components/Form.jsx";
+import { Context } from "../context/UserContext";
+import { useContext } from "react"
 
 export default function Menu() {
-
+   const {authenticated} = useContext(Context)
   const bebidas = [
     { id: 1, nome: "chá gelado", preco: 4.0, descricao: "feito com dksaodksadosadokdoadsadadasaddsadasd..."},
     { id: 2, nome: "café", preco: 5.0 },
@@ -24,9 +26,14 @@ export default function Menu() {
   return (
   
     <div>
-    <div className="bg-white ml-50% mr-50% p-25">
-      <Form/>
-    </div>
+      <div className="bg-white ml-50% mr-50% p-25">
+        
+        {authenticated && (
+          <Form/>
+        ) 
+        }
+      
+      </div>
 
       
     <div className="max-w-md mx-auto  m-25 shadow-lg rounded-xl bg-black/70 text-white p-5">

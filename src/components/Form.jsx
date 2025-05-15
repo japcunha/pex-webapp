@@ -1,6 +1,8 @@
-import react, { useState } from "react";
+import  { useState } from "react";
+
 
 export default function Form({ onSubmit, editProduct, onDelete}) {
+  
   const [product, setProduct] = useState({
     nome: "",
     preco: "",

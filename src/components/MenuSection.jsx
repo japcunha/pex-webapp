@@ -2,7 +2,10 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export default function MenuSection({ title, items }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+
+
+  
 
   return (
     <div className="border-b m-18 py-2 ">
