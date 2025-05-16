@@ -1,12 +1,12 @@
 import MenuSection from "../components/MenuSection.jsx";
-import Form from "../components/Form.jsx";
 import React, { useState, useEffect } from "react";
+import Form from "../pages/Form.jsx";
 import {
   getProduct,
   createProduct,
   updateProduct,
   deleteProduct,
-} from "../services/fakeApi.jsx";
+} from "../mock/mockProducts.js";
 
 export default function Menu({ isAdmin }) {
   const [products, setProducts] = useState([]);
@@ -17,21 +17,22 @@ export default function Menu({ isAdmin }) {
   useEffect(() => {
     loadProducts();
   }, []);
-  
+
   //carregar produtos
   const loadProducts = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await getProduct();
-      setProducts(response);
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      const data = await getProduct();
+      setProducts(data);
     } catch (err) {
-      setError("Falha ao carregar produtos");
-      console.error(err);
-    } finally {
-      setLoading(false);
+      setError("Erro ao carregar osdados");
+    }finally {
+    setLoading(false);
     }
   };
+
   //editar
   const handleProductSubmit = async (productData) => {
     try {
@@ -49,14 +50,9 @@ export default function Menu({ isAdmin }) {
   };
   //deletaar
   const handleProductDelete = async (id) => {
-    try {
-      await deleteProduct(id);
-      await loadProducts();
-      setEditProduct(null);
-    } catch (err) {
-      setError("Falha ao deletar produto");
-      console.error(err);
-    }
+    const updatedProducts = products.filter((p) => p.id !== id);
+    setProducts(updatedProducts);
+    setEditProduct(null);
   };
 
   // Filtra produtos por categoria
@@ -64,33 +60,37 @@ export default function Menu({ isAdmin }) {
   const salgados = products.filter((p) => p.categoria === "salgados");
   const sobremesas = products.filter((p) => p.categoria === "sobremesas");
 
-  if (loading) return <div>Carregando...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
-
   return (
-    <div>
+    <div className="">
       {isAdmin && (
         <div className="bg-white ml-50% mr-50% p-25">
           <Form
             onSubmit={handleProductSubmit}
             editProduct={editProduct}
             onDelete={handleProductDelete}
+            onCancelEdit={() => setEditProduct(null)}
           />
         </div>
       )}
 
-      <div className="max-w-md mx-auto m-25 shadow-lg rounded-xl bg-black/70 text-white p-2">
+      <div className="max-w-4x1 mx-auto m-25 shadow-lg rounded-xl bg-black/70 text-white p-2">
         <h1 className="text-2xl font-bold mb-8 mt-5 text-center">MENU</h1>
-        <MenuSection title="Bebidas" items={bebidas} onEdit={setEditProduct} />
+        <MenuSection
+          title="Bebidas"
+        items={products.filter((p) => p.categoria === "bebidas")}
+          onEdit={setEditProduct}
+        />
         <MenuSection
           title="Salgados"
           items={salgados}
           onEdit={setEditProduct}
+          onDelete={handleProductDelete}
         />
         <MenuSection
           title="Sobremesas"
           items={sobremesas}
           onEdit={setEditProduct}
+          onDelete={handleProductDelete}
         />
       </div>
     </div>

@@ -24,14 +24,16 @@ export default function MenuSection({ title, items, onEdit, image }) {
   return (
     <div className="border-b m-18 py-2">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => 
+          setIsOpen(!isOpen)}
+        
         className="flex justify-between w-full  px-4 py-2 font-semibold hover:bg-amber-600 rounded-2xl overflow-hidden "
         style={{
           backgroundImage: `url(${imagensCategoria[title]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          height: "150px",
+          height: "180px",
           position: "relative",
         }}
       >
@@ -47,9 +49,10 @@ export default function MenuSection({ title, items, onEdit, image }) {
       </button>
 
       {isOpen && (
-        <div className="mt-2 px-8 space-y-6">
+        <div className="mt-2 px-8 space-y-5">
           {Object.entries(groupedItems).map(([subcategory, subItems]) => (
-            <div key={subcategory} className="mb-6">
+
+            <div key={subcategory} className="mb-5">
               {title === "Bebidas" && subcategory !== title && (
                 <h3 className="font-medium text-md mb-3 text-amber-400">
                   {subcategory}
@@ -67,10 +70,20 @@ export default function MenuSection({ title, items, onEdit, image }) {
                       <span className="text-right w-1/4 whitespace-nowrap">
                         R$ {item.preco.toFixed(2)}
                       </span>
+
                     </div>
-                    <span className="block text-sm text-gray-400 break-words">
+                    <span className="block text-sm text-gray-400 break-words mt-5">
                       {item.descricao}
                     </span>
+                    
+                     {onEdit && (
+                      <button
+                    onClick={() => onEdit(item)}
+                    className="bg-amber-500 text-white m-5 w-30 px-3 py-1 rounded hover:bg-amber-600 text-sm"
+                  >
+                    Editar
+                  </button>
+                     )}
                   </li>
                 ))}
               </ul>
