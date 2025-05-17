@@ -16,7 +16,7 @@ export default function Navbar({isAdmin}) {
         <div className="space-x-6">
           <Link to="/" className="hover:text-amber-50">Home</Link>
           <Link to="/menu" className="hover:text-amber-50">Menu</Link>
-          {isAdmin && <Link to="/form" className="hover:text-amber-50">Formulário</Link>}
+          {isAdmin && <Link to="/products" className="hover:text-amber-50">Formulário</Link>}
           <Link to="/contact" className="hover:text-amber-50">Contato</Link>
          </div> 
          <div>

@@ -1,6 +1,6 @@
 import MenuSection from "../components/MenuSection.jsx";
 import React, { useState, useEffect } from "react";
-import Form from "../pages/Form.jsx";
+import Form from "../components/Form.jsx";
 import {
   getProduct,
   createProduct,
@@ -27,7 +27,7 @@ export default function Menu({ isAdmin }) {
       const data = await getProduct();
       setProducts(data);
     } catch (err) {
-      setError("Erro ao carregar osdados");
+      setError("Erro ao carregar os dados");
     }finally {
     setLoading(false);
     }
@@ -61,33 +61,22 @@ export default function Menu({ isAdmin }) {
   const sobremesas = products.filter((p) => p.categoria === "sobremesas");
 
   return (
-    <div className="">
-      {isAdmin && (
-        <div className="bg-white ml-50% mr-50% p-25">
-          <Form
-            onSubmit={handleProductSubmit}
-            editProduct={editProduct}
-            onDelete={handleProductDelete}
-            onCancelEdit={() => setEditProduct(null)}
-          />
-        </div>
-      )}
-
-      <div className="max-w-4x1 mx-auto m-25 shadow-lg rounded-xl bg-black/70 text-white p-2">
+    <div className="bg-black/60 m-25 max-w-4xl text-white mx-auto p-4 rounded-xl">
+      <div className="   ">
         <h1 className="text-2xl font-bold mb-8 mt-5 text-center">MENU</h1>
         <MenuSection
-          title="Bebidas"
+          title="bebidas"
         items={products.filter((p) => p.categoria === "bebidas")}
           onEdit={setEditProduct}
         />
         <MenuSection
-          title="Salgados"
+          title="salgados"
           items={salgados}
           onEdit={setEditProduct}
           onDelete={handleProductDelete}
         />
         <MenuSection
-          title="Sobremesas"
+          title="sobremesas"
           items={sobremesas}
           onEdit={setEditProduct}
           onDelete={handleProductDelete}

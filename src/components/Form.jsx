@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export default function Form({ onSubmit, editProduct, onDelete }) {
+export default function Form({
+  onSubmit,
+  editProduct,
+  onDelete,
+  onCancelEdit,
+}) {
   const [product, setProduct] = useState({
     id: null,
     nome: "",
@@ -110,7 +115,7 @@ export default function Form({ onSubmit, editProduct, onDelete }) {
           <option value="sobremesas">Sobremesas</option>
         </select>
 
-        <label className="block">Subcategoria</label>
+        <label className="block">Subcategoria *</label>
         <input
           type="text"
           name="subcategoria"
@@ -127,17 +132,25 @@ export default function Form({ onSubmit, editProduct, onDelete }) {
           >
             {editProduct ? "Salvar Alterações" : "Cadastrar Produto"}
           </button>
-          
-          
+
           {editProduct && (
-            <button
-              type="button"
-              onClick={() => onDelete(editProduct.id)}
-              className="bg-gray-700 text-white mt-10  px-4 py-2 rounded hover:bg-black cursor-pointer"
-            >
-              Excluir Produto
-            </button>
-            
+            <>
+              <button
+                type="button"
+                onClick={() => onDelete(editProduct.id)}
+                className="bg-red-600 text-white mt-10  px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
+              >
+                Excluir Produto
+              </button>
+
+              <button
+                type="button"
+                onClick={onCancelEdit}
+                className="bg-gray-700 text-white mt-10 px-4 py-2 rounded hover:bg-black cursor-pointer"
+              >
+                Cancelar Edição
+              </button>
+            </>
           )}
         </div>
       </form>
