@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-export default function MenuSection({ title, items, onEdit, image }) {
+export default function MenuSection({ title, items, onEdit }) {
   const [isOpen, setIsOpen] = useState(false);
 
   //subcategorias
