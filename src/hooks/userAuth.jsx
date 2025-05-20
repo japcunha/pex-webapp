@@ -12,7 +12,7 @@ export default function useAuth(){
     useEffect(()=>{
         const token = localStorage.getItem('token')
         if(token){
-          api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`  
+        api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`  
           setAuthenticated(true)
         }
     }, [])
@@ -20,10 +20,10 @@ export default function useAuth(){
     async function register(user) {
                      
         try {
-            await api.post('/users/', user).then((Response) =>{
+            await api.post('/users/', user).then((response) =>{
                 alert("Usuário cadastrado com sucesso")
-                console.log(Response.data)
-                return Response.data
+                console.log(response.data)
+                return response.data
             })
       
         } catch (error) {
@@ -50,7 +50,7 @@ export default function useAuth(){
 
             await authUser(data)
         } catch (error) {
-            error.response.data.message
+           return error.response.data.message
            
         }
   

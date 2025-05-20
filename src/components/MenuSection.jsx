@@ -25,10 +25,10 @@ export default function MenuSection({ title, items }) {
               key={item.id}
               className="py-2 border-b last:border-none flex justify-between"
             > <div> 
-                <span>{item.nome}</span>
-              <span className="block text-sm text-gray-400">{item.descricao}</span>
+                <span>{item.name}</span>
+              <span className="block text-sm text-gray-400">{item.description}</span>
               </div>
-              <span className="text-right">R$ {item.preco.toFixed(2)}</span>
+              <span className="text-right">R$ {item.price.toFixed(2)}</span>
             </li>
           ))}
         </ul>

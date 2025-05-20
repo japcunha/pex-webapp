@@ -2,11 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './index.css'
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-// import CategoryCard from "./components/CategoryCard.jsx";
-// import ProductCard from "./components/ProductCard.jsx";
-// import SectionMenu from './components/SectionMenu.jsx';
-// import SectionOpen from './components/SectionOpen.jsx';
-import MenuSection from './components/MenuSection.jsx';
+import RegisterProduct from "./pages/Register-product.jsx";
+import Products from "./pages/Products.jsx";
 import Home from "./pages/Home.jsx";
 import Menu from "./pages/Menu.jsx";
 //import Form from "./components/Form.jsx"
@@ -25,7 +22,9 @@ function App() {
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/menu" element={<Menu />} />
+                <Route path="/products" element={<Menu />} />
+                <Route path="/products/register" element={<RegisterProduct />} />
+                 <Route path="/products/all" element={<Products />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
