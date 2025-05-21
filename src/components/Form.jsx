@@ -5,31 +5,28 @@ export default function Form({
   editProduct,
   onDelete,
   onCancelEdit,
+  fields,
+  isAdmin,
 }) {
-  const [product, setProduct] = useState({
-    id: null,
-    nome: "",
-    preco: "",
-    descricao: "",
-    categoria: "",
-    subcategoria: "",
-  });
+  // estado local de cada produto
+  const [product, setProduct] = useState({});
 
+  if (!isAdmin) return null;
+
+  // Atualiza o formulário quando o produto a ser editado ou os campos mudarem
   useEffect(() => {
     if (editProduct) {
-      setProduct(editProduct);
+      setProduct(editProduct); //Preenche os campos com osdados do produto
     } else {
-      setProduct({
-        id: null,
-        nome: "",
-        preco: "",
-        descricao: "",
-        categoria: "",
-        subcategoria: "",
-      });
+      // Cria um objeto vazio com os campos definidos
+      const emptyProduct = fields.reduce((acc, field) => {
+        acc[field.name] = "";
+        return acc;
+      }, {});
+      setProduct(emptyProduct); //limpando fomulario d cadastro
     }
-  }, [editProduct]);
-
+  }, [editProduct, fields]);
+  //atualizando estado
   const handleChange = (event) => {
     const { name, value } = event.target;
     setProduct((prevProduct) => ({
@@ -37,7 +34,7 @@ export default function Form({
       [name]: value,
     }));
   };
-
+  //valida os dados e os envia!!!
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -50,16 +47,6 @@ export default function Form({
       ...product,
       preco: parseFloat(product.preco),
     });
-
-    if (!editProduct) {
-      setProduct({
-        nome: "",
-        preco: "",
-        descricao: "",
-        categoria: "",
-        subcategoria: "",
-      });
-    }
   };
 
   return (
@@ -69,86 +56,62 @@ export default function Form({
           {editProduct ? "editar produto" : "Cadastro de Produtos"}
         </h2>
 
-        <label className="block mb-2"> Nome *</label>
-        <input
-          type="text"
-          name="nome"
-          value={product.nome}
-          onChange={handleChange}
-          className="w-full p-2 border rounded mb-4"
-          required
-        />
+        {fields.map((field) => (
+          <div key={field.name} className="mb-4">
+            <label className="block mb-2">
+              {field.label} {field.required && "*"}
+            </label>
 
-        <label className="block mb-2">Preço *</label>
-        <input
-          type="number"
-          name="preco"
-          value={product.preco}
-          onChange={handleChange}
-          className="w-full p-2 border rounded mb-4"
-          step="0.01"
-          required
-        />
-
-        <label className="block mb-2">Descrição </label>
-        <input
-          type="text"
-          name="descricao"
-          value={product.descricao}
-          onChange={handleChange}
-          className="w-full p-2 border rounded mb-4"
-          step="0.01"
-        />
-
-        <label className="block mb-2">Categoria *</label>
-
-        <select
-          name="categoria"
-          value={product.categoria}
-          onChange={handleChange}
-          className="w-full p-2 border rounded mb-4"
-          required
-        >
-          <option value="">Selecione </option>
-          <option value="bebidas">Bebidas</option>
-          <option value="salgados">Salgados</option>
-          <option value="sobremesas">Sobremesas</option>
-        </select>
-
-        <label className="block">Subcategoria *</label>
-        <input
-          type="text"
-          name="subcategoria"
-          value={product.subcategoria}
-          onChange={handleChange}
-          className="w-full p-2 border rounded mb-4"
-          required
-        />
-
-        <div className="flex justify-center gap-5">
+            {field.type === "select" ? (
+              <select
+                name={field.name}
+                value={product[field.name] || ""}
+                onChange={handleChange}
+                required={field.required}
+                className="w-full p-2 border rounded"
+              >
+                {field.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={field.type}
+                name={field.name}
+                value={product[field.name] || ""}
+                onChange={handleChange}
+                required={field.required}
+                className="w-full p-2 border rounded"
+                step={field.type === "number" ? "0.01" : undefined}
+              />
+            )}
+          </div>
+        ))}
+        <div className="flex justify-center mt-4 gap-2">
           <button
             type="submit"
-            className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600 cursor-pointer"
+            className="bg-amber-600 text-white px-4 py-2 rounded hover:bg-amber-700 cursor-pointer"
           >
-            {editProduct ? "Salvar Alterações" : "Cadastrar Produto"}
+            {editProduct ? "Salvar" : "Cadastrar"}
           </button>
 
           {editProduct && (
             <>
               <button
                 type="button"
-                onClick={() => onDelete(editProduct.id)}
-                className="bg-red-600 text-white mt-10  px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
+                onClick={() => onDelete(product.id)}
+                className="bg-red-600 text-white px-4 py-2 rounded ml-2 hover:bg-red-70 cursor-pointer"
               >
-                Excluir Produto
+              Excluir
               </button>
-
               <button
                 type="button"
                 onClick={onCancelEdit}
-                className="bg-gray-700 text-white mt-10 px-4 py-2 rounded hover:bg-black cursor-pointer"
+                className="bg-gray-400 text-white px-4 py-2 rounded ml-2 hover:bg-gray-500 cursor-pointer"
               >
-                Cancelar Edição
+                Cancelar
               </button>
             </>
           )}

@@ -17,7 +17,7 @@ export default function Home() {
       setIndiceAtual((prev) => (prev + 1) % imagens.length);
     }, 5000);
 
-    return () => clearInterval(intervalo); // limpa o intervalo 
+    return () => clearInterval(intervalo); // limpa o intervalo!!
   }, []);
 
   return (
@@ -28,7 +28,7 @@ export default function Home() {
           <p>Fino Grão</p>
         </span>
       </h1>
-      {/*texto e carrossel:*/}
+     
          <div className="flex justify-center mt-20">
         <div className="relative w-full max-w-4xl h-[400px] overflow-hidden rounded-lg shadow-lg">
           

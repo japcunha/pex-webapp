@@ -8,6 +8,7 @@ export const mockProducts = [
     categoria: "bebidas",
     subcategoria: "Quentes"
   },
+  
   {
     id: 2,
     nome: "Coxinha",
@@ -18,6 +19,15 @@ export const mockProducts = [
   },
   {
     id: 3,
+    nome: "Bolo de Chocolate",
+    preco: 7.0,
+    descricao: "Fatia de bolo com cobertura",
+    categoria: "sobremesas",
+    subcategoria: "Doces"
+  
+  },
+   {
+    id: 4,
     nome: "Bolo de Chocolate",
     preco: 7.0,
     descricao: "Fatia de bolo com cobertura",
@@ -45,6 +55,9 @@ export const updateProduct = async (id, updatedData) => {
 };
 
 export const deleteProduct = async (id) => {
-  mockProducts = mockProducts.filter((p) => p.id !== id);
+ const index = mockProducts.findIndex((p) => p.id === id);
+  if (index !== -1) {
+    mockProducts.splice(index, 1); //modificar o array original!
+  }
   return true;
 };
