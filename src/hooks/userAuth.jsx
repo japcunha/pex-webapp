@@ -50,8 +50,7 @@ export default function useAuth(){
 
             await authUser(data)
         } catch (error) {
-           return error.response.data.message
-           
+           return error           
         }
   
     }

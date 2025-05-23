@@ -18,7 +18,7 @@ export default function Navbar() {
           {authenticated ? (
             <div className="space-x-6">
               <Link to="/" className="hover:text-amber-50">Home</Link>
-              <Link to="/products" className="hover:text-amber-50">Menu</Link>
+              <Link to="/products/menu" className="hover:text-amber-50">Menu</Link>
               <Link to="/products/register" className="hover:text-amber-50">Cadastrar produto</Link>
                <Link to="/products/all" className="hover:text-amber-50">Produtos</Link>
               <Link to="/contact" className="hover:text-amber-50">Contato</Link>
@@ -27,7 +27,7 @@ export default function Navbar() {
           ) : (
             <div className="space-x-6">
               <Link to="/" className="hover:text-amber-50">Home</Link>
-              <Link to="/menu" className="hover:text-amber-50">Menu</Link>
+              <Link to="/products/menu" className="hover:text-amber-50">Menu</Link>
               <Link to="/contact" className="hover:text-amber-50">Contato</Link>
               <Link to="/login" className="hover:text-amber-50">Login</Link>
               <Link to="/register" className="hover:text-amber-50">Cadastrar</Link>

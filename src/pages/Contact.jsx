@@ -6,7 +6,7 @@ export default function Contact() {
       <h1 className="text-3xl font-bold mb-6 text-center mt-15">Fale Conosco</h1>
 
       <p className="max-w-xl text-center mb-4 text-base">
-        Se você tiver dúvidas, entre em contato conosco!
+        Se você tiver dúvidas, fale conosco!
       </p>
 
       <p className="text-center text-lg font-semibold mb-6">
