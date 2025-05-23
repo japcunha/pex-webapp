@@ -64,7 +64,7 @@ export default function MenuSection({ title, items, onEdit }) {
                     <div className="flex justify-between gap-2 w-full">
                       <span className="font-medium w-1/3">{item.name}</span>
                       <span className="text-right w-1/4 whitespace-nowrap">
-                        R$ {item.price.toFixed(2)}
+                        R$ {item.price}
                       </span>
                     </div>
                     <span className="block text-sm text-gray-400 break-words mt-5">

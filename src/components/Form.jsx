@@ -1,11 +1,11 @@
-/* eslint-disable no-constant-binary-expression */
+
 import  { useState } from "react";
 import api from "../utils/api.js";
 
 export default function Form() {  
   const [product, setProduct] = useState({})
  const token = localStorage.getItem('token')
-  console.log(token)
+
   function handleChange (e){
     setProduct({...product, [e.target.name]: e.target.value}
   )
@@ -13,7 +13,7 @@ export default function Form() {
 
   async function handleSubmit (e) {
     e.preventDefault()
-    console.log(product)
+    
      await api.post("/products/", product, {
   headers: {
     Authorization: `Bearer ${JSON.parse(token)}`    
@@ -48,7 +48,7 @@ export default function Form() {
 
       <label className="block mb-2">Preço *</label>
       <input
-        type="number"
+        type="text"
         name="price"
         value={product.price}
         onChange={handleChange}
