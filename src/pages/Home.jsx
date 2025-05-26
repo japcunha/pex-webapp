@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 
 const imagens = [
-  "café (1).jpg",
-  "café (2).jpg",
-  "café (3).jpg",
-  "café (4).jpg",
-  "café (5).jpg",
-  "café (6).jpg",
+  'fino-grao-img (4).jpg',
+  'fino-grao-img (2).jpg',
+  'fino-grao-img (1).jpg',
+  'fino-grao-img (3).jpg',
+  'fino-grao-img (4).jpg',
 ];
 
 export default function Home() {
@@ -24,8 +23,8 @@ export default function Home() {
     <div className="px-4 py-15 ">
       <h1 className="text-5xl font-bold text-center text-white drop-shadow-l mt-20">
         Bem-vindo à Cafeteria{" "}
-        <span className="text-amber-100">
-          <p>Fino Grão</p>
+        <span className="text-amber-500">
+          <h1 className="text-4xl mt-2">Fino Grão</h1>
         </span>
       </h1>
       {/*texto e carrossel:*/}

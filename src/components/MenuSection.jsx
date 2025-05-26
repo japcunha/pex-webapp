@@ -27,7 +27,7 @@ export default function MenuSection({ title, items, onEdit }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex justify-between w-full  px-4 py-2 font-semibold hover:bg-amber-600 rounded-2xl overflow-hidden "
         style={{
-          backgroundImage: `url(${imagensCategoria[title]})`,
+          backgroundImage: `url(${imagensCategoria[title.toLowerCase()]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
