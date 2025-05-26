@@ -10,6 +10,13 @@ export default function Form({
 }) {
   // estado local de cada produto
   const [product, setProduct] = useState({});
+  const [message, setMessage] = useState("");
+
+
+  const showMessage = (text) => {
+    setMessage(text);
+    setTimeout(() => setMessage(""), 3000);
+  };
 
   if (!isAdmin) return null;
 
@@ -47,6 +54,8 @@ export default function Form({
       ...product,
       preco: parseFloat(product.preco),
     });
+
+     showMessage(editProduct ? "Produto editado com sucesso!" : "Produto cadastrado com sucesso!");
   };
 
   return (
@@ -55,6 +64,11 @@ export default function Form({
         <h2 className="text-2xl text-center font-bold mb-4">
           {editProduct ? "editar produto" : "Cadastro de Produtos"}
         </h2>
+        {message && (
+          <div className="mb-4 p-2 bg-green-100 border border-green-400 text-green-700 rounded text-center">
+            {message}
+          </div>
+        )}
 
         {fields.map((field) => (
           <div key={field.name} className="mb-4">
@@ -101,14 +115,21 @@ export default function Form({
             <>
               <button
                 type="button"
-                onClick={() => onDelete(product.id)}
+                onClick={() => {
+                  onDelete(product.id)
+                  showMessage("Produto apagado com sucesso!");
+                }}
                 className="bg-red-600 text-white px-4 py-2 rounded ml-2 hover:bg-red-70 cursor-pointer"
               >
-              Excluir
+                Excluir
               </button>
+
               <button
                 type="button"
-                onClick={onCancelEdit}
+                onClick={() => {
+                  onCancelEdit();
+                  setMessage("");
+                }}
                 className="bg-gray-400 text-white px-4 py-2 rounded ml-2 hover:bg-gray-500 cursor-pointer"
               >
                 Cancelar
