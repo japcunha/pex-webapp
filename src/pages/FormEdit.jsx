@@ -1,23 +1,35 @@
-import  { useState } from "react";
+import  { useState, useEffect } from "react";
 import api from "../utils/api.js";
+import { useParams } from "react-router-dom";
 
 export default function Form() {  
   const [product, setProduct] = useState({})
- const token = localStorage.getItem('token')
+  const token = localStorage.getItem('token')
+  const {id} = useParams()
 
   function handleChange (e){
     setProduct({...product, [e.target.name]: e.target.value}
   )
   }
 
+  useEffect(() =>{
+        api.get(`/products/${id}`, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`
+            }
+        }).then((response)=>{
+           setProduct( response.data)
+        })
+    }, [token, id])
+  
   async function handleSubmit (e) {
     e.preventDefault()
     
-     await api.post("/products/", product, {
-  headers: {
-    Authorization: `Bearer ${JSON.parse(token)}`    
-  }
-})     
+    await api.patch(`/products/${id}`, product, {
+        headers: {
+            Authorization: `Bearer ${JSON.parse(token)}`    
+        }
+    })     
    .then((response) =>{
     console.log(response.data)
      return response.data
@@ -29,17 +41,17 @@ export default function Form() {
   }
 
   return (
-    
-    <form onSubmit={handleSubmit}>
+    <div className="bg-white ml-50% mr-50% p-25">
+        <form onSubmit={handleSubmit}>
       <h2 className="text-2xl text-center font-bold mb-4">
-        Cadastro de Produtos
+        Editar Produto
       </h2>
       
       <label className="block mb-2">  Nome *</label>
       <input
         type="text"
         name="name"
-        value={product.name}
+        value={product.name || ''}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         required
@@ -49,7 +61,7 @@ export default function Form() {
       <input
         type="text"
         name="price"
-        value={product.price}
+        value={product.price || ''}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         step="0.01"
@@ -60,7 +72,7 @@ export default function Form() {
       <input
         type="text"
         name="description"
-        value={product.description}
+        value={product.description || ''}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         step="0.01"        
@@ -69,7 +81,7 @@ export default function Form() {
       <label className="block mb-2">Categoria *</label>
       <select
         name="categoryId"
-        value={product.category}
+        value={product.category || ''}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         required
@@ -84,7 +96,7 @@ export default function Form() {
         <input
           type="text"
           name="subcategoria"
-          value={product.subcategoria}
+          value={product.subcategoria || ''}
           onChange={handleChange}
           className="w-full p-2 border rounded mb-4"
           required
@@ -94,32 +106,13 @@ export default function Form() {
           <button
             type="submit"
             className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600 cursor-pointer"
-          >
-            {/* {editProduct ? "Salvar Alterações" : "Cadastrar Produto"} */}
-            Cadastrar produto
-          </button>
-
-          {/* {editProduct && ( */}
-            <>
-              <button
-                type="button"
-                // onClick={() => onDelete(editProduct.id)}
-                className="bg-red-600 text-white mt-10  px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
-              >
-                Excluir Produto
-              </button>
-
-              <button
-                type="button"
-                // onClick={onCancelEdit}
-                className="bg-gray-700 text-white mt-10 px-4 py-2 rounded hover:bg-black cursor-pointer"
-              >
-                Cancelar Edição
-              </button>
-            </>
-          {/* )} */}
+          >           
+          Editar produto
+          </button>         
         </div>
       </form>
+    </div>
+    
    
   );
 }

@@ -8,7 +8,7 @@ import "./index.css";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import RegisterProduct from "./pages/Register-product.jsx";
-import Products from "./pages/Product.jsx";
+import Products from "./pages/Products.jsx";
 import Home from "./pages/Home.jsx";
 import Menu from "./pages/Menu.jsx";
 //import Form from "./components/Form.jsx"
@@ -16,8 +16,8 @@ import Contact from "./pages/Contact.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/register.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
+import FormEdit from "./pages/FormEdit.jsx";
 
-//import Container from "./components/Container.jsx";
 
 function App() {
  
@@ -31,7 +31,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/products/menu" element={<Menu />} />
                 <Route path="/products/register" element={<RegisterProduct />} />
-                 <Route path="/products/all" element={<Products />} />
+                <Route path="/products/all" element={<Products />} />
+                <Route path="/products/:id" element={<FormEdit />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />

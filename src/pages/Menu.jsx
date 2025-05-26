@@ -5,12 +5,8 @@ import api from "../utils/api.js";
 export default function Menu() {   
   const [products, setProducts] = useState([])
   // eslint-disable-next-line no-constant-binary-expression
-  //const [token] = useState(localStorage.getItem(('token') || ''))
+  
 
-  // , {
-  //     headers:{
-  //       Authorization: `Bearer ${JSON.parse(token)}`
-  //     }
 
   useEffect(() =>{
     api.get("/products/menu")
