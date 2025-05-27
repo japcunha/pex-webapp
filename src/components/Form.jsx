@@ -4,6 +4,7 @@ import api from "../utils/api.js";
 export default function Form() {
   const [product, setProduct] = useState({});
   const token = localStorage.getItem("token");
+  const [message, setMessage] = useState("");
 
   function handleChange(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -12,19 +13,20 @@ export default function Form() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    await api
-      .post("/products/", product, {
+    try {
+      const response = await api.post("/products/", product, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
         },
-      })
-      .then((response) => {
-        console.log(response.data);
-        return response.data;
-      })
-      .catch((error) => {
-        return error.message;
       });
+
+      setMessage("✅ Produto cadastrado com sucesso!");
+      setProduct({});
+    } catch (error) {
+      setMessage(" Erro ao cadastrar produto.");
+    }
+
+    setTimeout(() => setMessage(""), 3000);
   }
 
   return (
@@ -32,6 +34,10 @@ export default function Form() {
       <h2 className="text-2xl text-center font-bold mb-4">
         Cadastro de Produtos
       </h2>
+
+      {message && (
+        <div className="text-center text-sm text-green-600 mb-4">{message}</div>
+      )}
 
       <label className="block mb-2"> Nome *</label>
       <input
@@ -104,6 +110,10 @@ export default function Form() {
         <>
           <button
             type="button"
+            onClick={() => {
+              setMessage("Produto excluído!");
+              setTimeout(() => setMessage(""), 3000);
+            }}
             // onClick={() => onDelete(editProduct.id)}
             className="bg-red-600 text-white mt-10  px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
           >
@@ -112,6 +122,11 @@ export default function Form() {
 
           <button
             type="button"
+            onClick={() => {
+              setProduct({});
+              setMessage(" Edição cancelada.");
+              setTimeout(() => setMessage(""), 3000);
+            }}
             // onClick={onCancelEdit}
             className="bg-gray-700 text-white mt-10 px-4 py-2 rounded hover:bg-black cursor-pointer"
           >

@@ -27,7 +27,7 @@ h2 {
 h3 {
     font-weight: bold;
     font-size: 15px;
-    color: #222;
+    color: #e4d09ae0;
 }
 
 
@@ -52,7 +52,7 @@ ul {
     display: flex;
     justify-content: space-between;
     padding: 5px;
-    border-bottom: 2px solid #454545b8;
+    border-bottom: 2px solid #646363b8;
     margin-bottom: 25px;
 }
 

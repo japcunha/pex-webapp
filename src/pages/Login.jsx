@@ -1,21 +1,20 @@
 import { useContext, useState } from "react";
-import { Context } from "../context/UserContext"
+import { Context } from "../context/UserContext";
 import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("")
-  const { login } = useContext(Context)
-      
-  async function handleSubmit (e){
-    e.preventDefault()
+  const [password, setPassword] = useState("");
+  const { login } = useContext(Context);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
     const user = {
       email,
-      password
-    }
+      password,
+    };
 
-    login(user)
-    
+    login(user);
   }
 
   return (
@@ -24,9 +23,7 @@ export default function Login() {
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded shadow-md w-full max-w-sm"
       >
-        <h2 className="text-2xl font-bold mb-7  text-center">
-          Login
-        </h2>
+        <h2 className="text-2xl font-bold mb-7  text-center">Login</h2>
 
         <input
           type="email"
@@ -39,23 +36,22 @@ export default function Login() {
         <input
           type="password"
           placeholder="Senha"
-          className="w-full p-2 border border-gray-300 rounded mb-3"          
+          className="w-full p-2 border border-gray-300 rounded mb-3"
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
         <button
           type="submit"
-          className="w-full bg-black text-white p-3 rounded hover:bg-gray-800">
-          Entrar          
+          className="w-full bg-black text-white p-3 rounded hover:bg-gray-800 cursor-pointer"
+        >
+          Entrar
         </button>
-      
-        <p>Não tem conta? <Link to="/register">Cadastrar</Link></p>
 
+        <p>
+          Não tem conta? <Link to="/register">Cadastrar</Link>
+        </p>
       </form>
-
-    
-
     </div>
   );
 }

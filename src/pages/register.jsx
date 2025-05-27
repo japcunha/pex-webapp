@@ -7,6 +7,7 @@ function Register(){
     const [email, setEmail] = useState("") 
     const [password, setPassword] = useState("") 
     const [confPassword, setConfPassword] = useState("") 
+     const [success, setSuccess] = useState("")
 
     const { register } = useContext(Context)
 
@@ -18,8 +19,13 @@ function Register(){
             password,
             confPassword
         }
-        register(user)        
-      }
+         try {
+      await register(user)
+      setSuccess("Cadastro feito com sucesso!")
+    } catch (err) {
+      setSuccess("") 
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white/30">
@@ -69,7 +75,7 @@ function Register(){
 
         <button
           type="submit"
-          className="w-full bg-black text-white p-3 rounded hover:bg-gray-800">
+          className="w-full bg-black text-white p-3 rounded hover:bg-gray-800 cursor-pointer">
           Cadastrar         
         </button>       
           

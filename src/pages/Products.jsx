@@ -86,7 +86,12 @@ export default function Products() {
               <div className={styles.div_item}>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
-                <span>{item.price}</span>
+                <span>
+                  {Number(item.price).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </span>
               </div>
               <div className={styles.div_btn}>
                 <Link className={styles.a_edit} to={`/products/${item.id}`}>
@@ -115,7 +120,12 @@ export default function Products() {
               <div className={styles.div_item}>
                 <h3>{item.name}</h3>
                 <p>{item.description}</p>
-                <span>{item.price}</span>
+                <span>
+                  {Number(item.price).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </span>
               </div>
               <div className={styles.div_btn}>
                 <Link className={styles.a_edit} to={`/products/${item.id}`}>
