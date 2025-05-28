@@ -4,7 +4,7 @@ import api from "../utils/api.js";
 
 export default function Menu() {   
   const [products, setProducts] = useState([])
-  // eslint-disable-next-line no-constant-binary-expression
+ 
   
 
 
