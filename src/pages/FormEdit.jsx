@@ -81,12 +81,12 @@ export default function Form() {
       <label className="block mb-2">Categoria *</label>
       <select
         name="categoryId"
-        value={product.category || ''}
+        value={product.categoryId || ''}
         onChange={handleChange}
         className="w-full p-2 border rounded mb-4"
         required
       >
-        <option disabled selected> Selecione uma categoria</option>
+        <option disabled > Selecione uma categoria</option>
         <option value="1">Bebidas</option>
         <option value="2">Salgados</option>
         <option value="3">Sobremesas</option>

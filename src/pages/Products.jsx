@@ -45,29 +45,36 @@ export default function Products() {
     <div className={styles.div_product}>
         <h2>Bebidas</h2>
 
-      <ul>
-        {bebidas.map((item) =>(
-          <li key={item.id} className={styles.li_context}>
-            <div className={styles.div_item}>
-                <h3>{item.name}</h3>
-            <p>{item.description}</p>
-            <span>{item.price}</span>
-            </div>
-            <div className={styles.div_btn}>
-                <Link className={styles.a_edit} to={`/products/${item.id}`}>Editar</Link>
-            <button className={styles.button_detalhes} onClick={() =>{
-              removeProduct(item.id)
-            }}>Excluir</button>
-            </div>
-          </li>
-        ))}          
-      </ul> 
+        {bebidas.length > 0 ? (
+            <ul>   
+            {bebidas.map((item) =>(
+              <li key={item.id} className={styles.li_context}>
+                <div className={styles.div_item}>
+                    <h3>{item.name}</h3>
+                <p>{item.description}</p>
+                <span>{item.price}</span>
+                </div>
+                <div className={styles.div_btn}>
+                    <Link className={styles.a_edit} to={`/products/${item.id}`}>Editar</Link>
+                <button className={styles.button_detalhes} onClick={() =>{removeProduct(item.id)}}>Excluir</button>
+                </div>
+              </li>
+            ))}          
+          </ul> 
+        ) :(
+          <p>Nenhuma bebida cadastrada</p>
+        )
+
+        }
+     
     </div>
 
     <div className={styles.div_product}>
         <h2>Salgados</h2>
+      
+       {salgados.length > 0 ? (
 
-      <ul>
+         <ul>
         {salgados.map((item) =>(
           <li key={item.id} className={styles.li_context}>
             <div className={styles.div_item}>
@@ -84,12 +91,16 @@ export default function Products() {
           </li>
         ))}          
       </ul> 
+       ) :(
+         <p>Nenhum salgado cadastrada</p>
+       )}
     </div>
 
 
     <div className={styles.div_product}>
         <h2>Sobremesas</h2>
 
+       {sobremesas.length > 0 ? (
       <ul>
         {sobremesas.map((item) =>(
           <li key={item.id} className={styles.li_context}>
@@ -107,6 +118,11 @@ export default function Products() {
           </li>
         ))}          
       </ul> 
+       ) : (
+        <p>Nenhuma sobremesa cadastrada</p>
+       )
+
+       }
     </div>
 
 

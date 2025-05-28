@@ -94,30 +94,9 @@ export default function Form() {
           <button
             type="submit"
             className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600 cursor-pointer"
-          >
-            {/* {editProduct ? "Salvar Alterações" : "Cadastrar Produto"} */}
+          >           
             Cadastrar produto
-          </button>
-
-          {/* {editProduct && ( */}
-            <>
-              <button
-                type="button"
-                // onClick={() => onDelete(editProduct.id)}
-                className="bg-red-600 text-white mt-10  px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
-              >
-                Excluir Produto
-              </button>
-
-              <button
-                type="button"
-                // onClick={onCancelEdit}
-                className="bg-gray-700 text-white mt-10 px-4 py-2 rounded hover:bg-black cursor-pointer"
-              >
-                Cancelar Edição
-              </button>
-            </>
-          {/* )} */}
+          </button>         
         </div>
       </form>
    
