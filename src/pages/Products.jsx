@@ -1,13 +1,13 @@
 import  { useState, useEffect } from "react";
-import Form from "../components/Form.jsx";
-import MenuSection from "../components/MenuSection.jsx"
 import api from "../utils/api.js"
 import styles from "./Products.module.css"
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom"
+import { FaSpinner } from 'react-icons/fa'
+import Alert from "../components/Alert.jsx";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsoading] = useState(true)
   const token = localStorage.getItem('token')
 
   // Carrega os produtos ao montar a página
@@ -16,6 +16,9 @@ export default function Products() {
       api.get("/products/menu")
       .then((response) =>{      
         setProducts(response.data)
+       setTimeout(() =>{
+         setIsoading(false)
+       }, 600)
       })
     }, [])
 
@@ -26,10 +29,17 @@ export default function Products() {
         }
       }).then((response) =>{
         const updateProducts = products.filter((product) => product.id !== id)
-        setProducts(updateProducts)
-        console.log(response.data)
+         Alert({
+            title: "Produto removido com sucesso!",
+            type: "success"
+          })
+        setProducts(updateProducts)        
         return response.data
       }).catch((err) =>{
+         Alert({
+            title: "Erro ao remover produto!",
+            type: "error"
+          })
         return err
       })
     }
@@ -40,9 +50,15 @@ export default function Products() {
   
   return (
     <div className={styles.div_main}>
-     <h1>Gerenciador de productos</h1>
-    
-    <div className={styles.div_product}>
+      <h1>Gerenciador de productos</h1>
+    {isLoading ? (
+         <div className="flex items-center justify-center h-screen bg-gray-100">
+      <FaSpinner className="animate-spin text-orange-400 text-4xl mr-2" />
+      <p className="text-gray-700 text-lg">Carregando produtos...</p>
+    </div>
+    ): (
+      <>
+        <div className={styles.div_product}>
         <h2>Bebidas</h2>
 
         {bebidas.length > 0 ? (
@@ -64,12 +80,11 @@ export default function Products() {
         ) :(
           <p>Nenhuma bebida cadastrada</p>
         )
-
         }
      
-    </div>
+      </div>
 
-    <div className={styles.div_product}>
+      <div className={styles.div_product}>
         <h2>Salgados</h2>
       
        {salgados.length > 0 ? (
@@ -94,10 +109,10 @@ export default function Products() {
        ) :(
          <p>Nenhum salgado cadastrada</p>
        )}
-    </div>
+      </div>
 
 
-    <div className={styles.div_product}>
+      <div className={styles.div_product}>
         <h2>Sobremesas</h2>
 
        {sobremesas.length > 0 ? (
@@ -123,11 +138,12 @@ export default function Products() {
        )
 
        }
-    </div>
-
-
-
+      </div> 
+      
+      </>
+    )
     
+    }         
     </div>
-  );
+  )
 }

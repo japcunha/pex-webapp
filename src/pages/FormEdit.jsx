@@ -1,11 +1,14 @@
 import  { useState, useEffect } from "react";
 import api from "../utils/api.js";
 import { useParams } from "react-router-dom";
+import Alert from "../components/Alert.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {  
   const [product, setProduct] = useState({})
   const token = localStorage.getItem('token')
   const {id} = useParams()
+  const navigate = useNavigate()
 
   function handleChange (e){
     setProduct({...product, [e.target.name]: e.target.value}
@@ -31,10 +34,18 @@ export default function Form() {
         }
     })     
    .then((response) =>{
-    console.log(response.data)
-     return response.data
-   })
+     Alert({
+        title: "Produto atualizado com sucesso!",
+        type: "success"
+      })
+      navigate('/products/all')
+      return response.data
+    })
    .catch((error) =>{
+     Alert({
+        title: "Erro ao atualizar produto!",
+        type: "error"
+      })
     return error.message
    })
     
