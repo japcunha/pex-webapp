@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import axios from 'axios'
 
 export default axios.create({
-    baseURL: 'https://fino-grao-cafe.onrender.com'
+    baseURL: import.meta.env.VITE_API_URL
 })
