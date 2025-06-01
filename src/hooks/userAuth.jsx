@@ -2,6 +2,7 @@ import api from '../utils/api'
 
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Alert from '../components/Alert'
 
 
 export default function useAuth(){
@@ -21,14 +22,21 @@ export default function useAuth(){
                      
         try {
             await api.post('/users/', user).then((response) =>{
-                alert("Usuário cadastrado com sucesso")
-                console.log(response.data)
-                return response.data
+                
+            Alert({
+                title: "Usuário cadastrado com sucesso!",
+                type: "success"
+            })
+             return response.data
             })
       
         } catch (error) {
-            console.log(error.response.data.message           
-            )
+             Alert({
+            title: "Erro ao cadastrar usuário!",
+            type: "error"
+        })
+            error.response.data.message           
+            
         }
 
     }
@@ -38,18 +46,27 @@ export default function useAuth(){
        
        localStorage.setItem('token', JSON.stringify(data.token))
        navigate('/')
-       localStorage.setItem()
+       
     }
 
     async function login(user) {
       
         try {
           const data = await api.post('/users/login', user).then((response) =>{
-                return response.data
+            return response.data
+        })
+        
+        Alert({
+            title: "Login realizado com sucesso!",
+            type: "success"
         })
 
             await authUser(data)
         } catch (error) {
+             Alert({
+            title: "Erro ao realizar o login!",
+            type: "error"
+        })
            return error           
         }
   
@@ -59,6 +76,10 @@ export default function useAuth(){
         setAuthenticated(false)
         localStorage.removeItem('token')
         api.defaults.headers.Authorization = undefined
+         Alert({
+            title: "Logout realizado com sucesso!",
+            type: "success"
+        })
         navigate('/')      
     }
 

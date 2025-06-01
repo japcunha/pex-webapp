@@ -22,16 +22,17 @@ export default function MenuSection({ title, items, onEdit }) {
   };
 
   return (
-    <div className="border-b m-5  py-2">
+    <div className="">
+    <div className="border-b py-2">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-between w-full  px-4 py-2 font-semibold hover:bg-amber-600 rounded-2xl overflow-hidden "
+        className="relative flex justify-between w-full px-4 py-2 font-semibold hover:bg-amber-600 overflow-hidden rounded-2x1"
         style={{
           backgroundImage: `url(${imagensCategoria[title.toLowerCase()]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          height: "180px",
+          height: "120px",
           position: "relative",
         }}
       >
@@ -45,6 +46,7 @@ export default function MenuSection({ title, items, onEdit }) {
           <ChevronDown size={24} className="text-white" />
         )}
       </button>
+      </div>
 
       {isOpen && (
         <div className="mt-2 px-8 space-y-5">

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import api from "../utils/api.js";
+import Alert from "./Alert.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   const [product, setProduct] = useState({});
   const token = localStorage.getItem("token");
-  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
 
   function handleChange(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -13,31 +16,34 @@ export default function Form() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
-      const response = await api.post("/products/", product, {
+    await api
+      .post("/products/", product, {
         headers: {
           Authorization: `Bearer ${JSON.parse(token)}`,
         },
+      })
+      .then((response) => {
+        Alert({
+          title: "Produto cadastrado com sucesso!",
+          type: "success",
+        });
+        navigate("/products/all");
+        return response.data;
+      })
+      .catch((error) => {
+        Alert({
+          title: "Erro ao cadastrar produto!",
+          type: "error",
+        });
+        return error.message;
       });
-
-      setMessage("✅ Produto cadastrado com sucesso!");
-      setProduct({});
-    } catch (error) {
-      setMessage(" Erro ao cadastrar produto.");
-    }
-
-    setTimeout(() => setMessage(""), 3000);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="max-w-xl w-full mx-auto px-4 py-6 bg-white rounded shadow-md">
       <h2 className="text-2xl text-center font-bold mb-4">
         Cadastro de Produtos
       </h2>
-
-      {message && (
-        <div className="text-center text-sm text-green-600 mb-4">{message}</div>
-      )}
 
       <label className="block mb-2"> Nome *</label>
       <input
@@ -100,40 +106,11 @@ export default function Form() {
       <div className="flex justify-center gap-5">
         <button
           type="submit"
-          className="bg-amber-500 text-white  mt-10 px-4 py-2 rounded hover:bg-amber-600 cursor-pointer"
+          className="bg-amber-500 text-white  px-6 py-2 rounded hover:bg-amber-600 transition-colors  hover:bg-amber-600 cursor-pointer"
         >
           {/* {editProduct ? "Salvar Alterações" : "Cadastrar Produto"} */}
           Cadastrar produto
         </button>
-
-        {/* {editProduct && ( */}
-        <>
-          <button
-            type="button"
-            onClick={() => {
-              setMessage("Produto excluído!");
-              setTimeout(() => setMessage(""), 3000);
-            }}
-            // onClick={() => onDelete(editProduct.id)}
-            className="bg-red-600 text-white mt-10  px-4 py-2 rounded hover:bg-red-700 cursor-pointer"
-          >
-            Excluir Produto
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setProduct({});
-              setMessage(" Edição cancelada.");
-              setTimeout(() => setMessage(""), 3000);
-            }}
-            // onClick={onCancelEdit}
-            className="bg-gray-700 text-white mt-10 px-4 py-2 rounded hover:bg-black cursor-pointer"
-          >
-            Cancelar Edição
-          </button>
-        </>
-        {/* )} */}
       </div>
     </form>
   );

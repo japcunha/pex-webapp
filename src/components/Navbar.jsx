@@ -13,10 +13,14 @@ export default function Navbar() {
     "hover:underline hover:decoration-white hover:text-lg transition-all duration-200 block mt-2 md:mt-0";
 
   return (
-    <nav className="bg-black/85  text-white p-4 fixed top-0 w-full z-50">
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
+    <nav className="bg-black/85  text-white  py-3 fixed top-0 w-full z-50 shadow-md ">
+      <div className="flex justify-between items-center px-4 max-w-full md:max-w-6xl mx-auto">
         <Link to="/" className="text-1xl font-bold hover:text-amber-50">
-          <img src="/logo.png" alt="Fino Grão Café" className="h-8 w-auto" />
+          <img
+            src="/logo.png"
+            alt="Fino Grão Café"
+            className="h-8 w-auto max-w-[120px]"
+          />
         </Link>
 
         <button
