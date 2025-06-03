@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 
 const imagens = [
-  "café (1).jpg",
-  "café (2).jpg",
-  "café (3).jpg",
-  "café (4).jpg",
-  "café (5).jpg",
-  "café (6).jpg",
+  "fino-grao-img (4).jpg",
+  "fino-grao-img (2).jpg",
+  "fino-grao-img (1).jpg",
+  "fino-grao-img (3).jpg",
+  "fino-grao-img (4).jpg",
 ];
 
 export default function Home() {
@@ -17,27 +16,27 @@ export default function Home() {
       setIndiceAtual((prev) => (prev + 1) % imagens.length);
     }, 5000);
 
-    return () => clearInterval(intervalo); // limpa o intervalo 
+    return () => clearInterval(intervalo); // limpa o intervalo
   }, []);
 
   return (
     <div className="px-4 py-15 ">
-      <h1 className="text-5xl font-bold text-center text-white drop-shadow-l mt-20">
+      <h2 className="text-3xl font-bold text-center text-white drop-shadow-l mt-22">
         Bem-vindo à Cafeteria{" "}
-        <span className="text-amber-100">
-          <p>Fino Grão</p>
+        <span className="text-lime-900 font-extrabold text-4xl drop-shadow-[0_0_1px_white]">
+          <h1 className="mt-5">Fino Grão</h1>
         </span>
-      </h1>
+      </h2>
       {/*texto e carrossel:*/}
-         <div className="flex justify-center mt-20">
+      <div className="flex justify-center mt-5">
         <div className="relative w-full max-w-4xl h-[400px] overflow-hidden rounded-lg shadow-lg">
-          
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8 z-10">
-            <p className="text-white text-lg text-center leading-relaxed max-w-xl">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident eos
-              excepturi deserunt nihil repudiandae obcaecati sint voluptates non
-              deleniti impedit aperiam esse ipsum, rem doloremque eum expedita
-              dolore illum animi!
+            <p className="text-amber-100 italic text-center leading-relaxed max-w-xl ">
+              Café de origem e com tradição!
+              <br />
+              Segunda a Sexta: 08:30h-18:30
+              <br />
+              Sabados: 8:30-13:00
             </p>
           </div>
 
@@ -53,7 +52,6 @@ export default function Home() {
                 className="w-full flex-shrink-0 object-cover h-full"
               />
             ))}
-          
           </div>
         </div>
       </div>

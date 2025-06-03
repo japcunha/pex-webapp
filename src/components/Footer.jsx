@@ -8,7 +8,7 @@ export default function Footer() {
           <p>Cafeteria Fino Grão</p>
         <div className="mt-4 space-x-6">
           <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Facebook</a>
-          <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Instagram</a>
+          <a href="https://www.instagram.com/fino_grao_cafes_especiais/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Instagram</a>
           <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">Twitter</a>
         </div>
       </div>
