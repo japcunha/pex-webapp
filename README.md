@@ -4,7 +4,7 @@
 Este é o projeto **frontend** de um site para uma **cafeteria**, desenvolvido com **React.js**. 
 O sistema permite que usuários se cadastrem, façam login, visualizem produtos e, se forem responsáveis pelo gerenciamento, possam **criar, editar e deletar produtos** no sistema.
 
----
+--- Aplicação completa: https://fino-grao-cafe-v1.onrender.com
 
 ## Funcionalidades
 
